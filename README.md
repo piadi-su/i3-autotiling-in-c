@@ -30,7 +30,11 @@ Copy and paste these commands in your terminal to install:
 
 * mv autotiling ~/.local/bin/
 
-#add this to your i3 config
+#add this to your i3 config(~/.config/i3/config )
 
 * exec_always --no-startup-id autotiling
+
+#add this to your sway config (~/.config/sway/config)
+
+* exec_always autotiling 
 
