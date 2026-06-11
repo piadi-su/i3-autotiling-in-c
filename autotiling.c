@@ -19,7 +19,6 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <inttypes.h>
-#include <ctype.h>
 #include <getopt.h>
 
 #define I3_IPC_MAGIC "i3-ipc"
@@ -322,6 +321,21 @@ static int in_list(char **list, int n, const char *s) {
     return 0;
 }
 
+static void free_config(struct config *cfg) {
+    for (int i = 0; i < cfg->n_outputs; i++)
+        free(cfg->outputs[i]);
+    free(cfg->outputs);
+
+    for (int i = 0; i < cfg->n_workspaces; i++)
+        free(cfg->workspaces[i]);
+    free(cfg->workspaces);
+
+    for (int i = 0; i < cfg->n_events; i++)
+        free(cfg->events[i]);
+    free(cfg->events);
+}
+
+
 static void usage(const char *prog) {
     fprintf(stderr,
         "Usage: %s [options]\n"
@@ -337,9 +351,23 @@ static void usage(const char *prog) {
         prog);
 }
 
+
+static struct config *gcfg = NULL;
+static char *gsockpath = NULL;
+
+static void cleanup(void) {
+    if (gcfg) free_config(gcfg);
+    if (gsockpath) free(gsockpath);
+}
+
+
 int main(int argc, char **argv) {
     struct config cfg;
+	gcfg = &cfg;
+	atexit(cleanup);
+
     memset(&cfg,0,sizeof(cfg));
+
     cfg.debug = 0;
     cfg.splitratio = 1.0;
     cfg.splitwidth = 1.0;
@@ -425,6 +453,8 @@ int main(int argc, char **argv) {
     }
 
     char *sockpath = get_socket_path();
+	gsockpath = sockpath;
+
     if (!sockpath) die("Could not determine i3/sway socket. Set SWAYSOCK or I3SOCK env or adjust code.");
     if (verbose) fprintf(stderr, "Using socket: %s\n", sockpath);
 
