@@ -1,4 +1,4 @@
-# AUTO TILING FOR I3 (C VERSION)
+# i3flow
 
 A lightweight, fast auto-tiling daemon for **i3 and sway**, written in **C**.
 Inspired by the old Python auto-tiling script, but with minimal dependencies
@@ -12,8 +12,8 @@ It uses 1.5~ Mb of ram.
 ## Installation
 
 ```bash
-git clone https://github.com/piadi-sudo/i3-autotiling-in-c.git
-cd i3-autotiling-in-c
+git clone https://github.com/piadi-su/i3flow.git
+cd i3flow
 sudo make install
 ```
 
@@ -33,7 +33,7 @@ Add the following line to your i3 config file:
 `~/.config/i3/config`
 
 ```bash
-exec_always --no-startup-id autotiling
+exec_always --no-startup-id i3flow
 ```
 
 ### Sway
@@ -43,18 +43,18 @@ Add the following line to your Sway configuration file:
 `~/.config/sway/config`
 
 ```bash
-exec_always autotiling
+exec_always i3flow
 ```
 
 ---
 
 ## Screenshots
 
-### Before Auto-Tiling
+### Before i3flow
 
 ![Before Auto-Tiling](img/before.png)
 
-### After Auto-Tiling
+### After i3flow
 
 ![After Auto-Tiling](img/after.png)
 

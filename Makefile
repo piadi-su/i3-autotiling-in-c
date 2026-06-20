@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O2 -Wall -Wextra -std=gnu11
 
-TARGET = autotiling
+TARGET = i3flow
 PREFIX = /usr/local
 BINDIR = $(PREFIX)/bin
 
@@ -9,7 +9,7 @@ BINDIR = $(PREFIX)/bin
 
 all: $(TARGET)
 
-$(TARGET): src/autotiling.c
+$(TARGET): src/i3flow.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 install: $(TARGET)
