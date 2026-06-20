@@ -1,44 +1,26 @@
 # AUTO TILING FOR I3 (C VERSION)
 
-A lightweight, fast auto-tiling tool for the **i3 window manager**, written in **C**.
-Inspired by the old Python auto-tiling script, but much faster.
+A lightweight, fast auto-tiling daemon for **i3 and sway**, written in **C**.
+Inspired by the old Python auto-tiling script, but with minimal dependencies
+and no python vm.
+It uses 1.5~ Mb of ram.
 
----
 
-## Features
-
-* Automatically tiles windows in i3
-* Written in C for speed and low overhead
-* Easy to install and use
 
 ---
 
 ## Installation
 
-Copy and paste the following commands into your terminal.
-
-### Clone the repository
-
 ```bash
 git clone https://github.com/piadi-sudo/i3-autotiling-in-c.git
-```
-
-### Enter the repository directory
-
-```bash
 cd i3-autotiling-in-c
+sudo make install
 ```
 
-### Build the project
+### Uninstall
 
 ```bash
-make
-```
-
-### Move the binary to your PATH
-
-```bash
-mv autotiling ~/.local/bin/
+sudo make uninstall
 ```
 
 ---
@@ -56,7 +38,8 @@ exec_always --no-startup-id autotiling
 
 ### Sway
 
-Add the following line to your Sway config file:
+Add the following line to your Sway configuration file:
+
 `~/.config/sway/config`
 
 ```bash

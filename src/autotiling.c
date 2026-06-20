@@ -223,7 +223,6 @@ static int extract_focused_info(const char *tree_json,
         else q -= step;
         const char *cand = q == tree_json ? tree_json : q;
         // find last occurrence of "\"layout\":\"" before p
-        const char *r = p;
         const char *last = NULL;
         while (1) {
             const char *tmp = strstr(cand, "\"layout\":");
@@ -237,7 +236,8 @@ static int extract_focused_info(const char *tree_json,
     if (found_layout) {
         char lay[64] = {0};
         if (sscanf(found_layout, "\"layout\":\"%63[^\"]", lay) == 1) {
-            strncpy(parent_layout, lay, parent_layout_len-1);
+            // strncpy(parent_layout, lay, parent_layout_len-1);
+			snprintf(parent_layout, parent_layout_len, "%s", lay);
         }
     } else {
         parent_layout[0] = '\0';
@@ -264,7 +264,8 @@ static int extract_focused_info(const char *tree_json,
         if (n) {
             char nb[128] = {0};
             if (sscanf(n, "\"name\":\"%127[^\"]", nb) == 1) {
-                strncpy(output_name, nb, output_len-1);
+                // strncpy(output_name, nb, output_len-1);
+				snprintf(output_name, output_len, "%s", nb);
             }
         }
     } else {
